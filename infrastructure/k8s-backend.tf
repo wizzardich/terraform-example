@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "backend" {
   metadata {
-    name = "flask-backend"
+    name = "backend"
   }
 }
 
@@ -55,6 +55,36 @@ resource "kubernetes_service" "backend" {
     port {
       port        = 8000
       target_port = 8000
+    }
+  }
+}
+
+resource "kubernetes_ingress_v1" "flask-ingress" {
+  metadata {
+    name = "flask-ingress"
+    namespace = kubernetes_namespace.backend.metadata.0.name
+    annotations = {
+      "nginx.ingress.kubernetes.io/rewrite-target" = "/$2"
+    }
+  }
+  spec {
+    ingress_class_name = "nginx"
+    rule {
+      http {
+        path {
+          path = "/flask(/|$)(hello)"
+          path_type = "Prefix"
+          backend {
+            service {
+                name = kubernetes_service.backend.metadata.0.name
+                
+                port {
+                    number = kubernetes_service.backend.spec.0.port.0.port
+                }
+            }
+          }
+        }
+      }
     }
   }
 }
