@@ -2,6 +2,7 @@ var express = require("express");
 var fetch = require("cross-fetch");
 var app = express();
 FIB_ENDPOINT = process.env.FIB_ENDPOINT || "http://localhost:8000/fib";
+LOAD_ENDPOINT = process.env.LOAD_ENDPOINT || "http://localhost:8000/load";
 
 /**
  * Internal health check endpoint.
