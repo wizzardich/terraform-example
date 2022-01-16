@@ -81,7 +81,7 @@ resource "kubernetes_horizontal_pod_autoscaler" "flask-autoscaler" {
 
     scale_target_ref {
       kind = "Deployment"
-      name = kubernetes_deployment.flask.
+      name = kubernetes_deployment.flask.metadata.0.name
     }
   }
 }
