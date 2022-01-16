@@ -37,6 +37,24 @@ app.get("/random_fib", async (req, res, next) => {
   }
 });
 
+/**
+ * Generates load on the backend
+ */
+ app.get("/load", async (req, res, next) => {
+  res = res.set({
+    "Access-Control-Allow-Origin": "*",
+  });
+
+  try {
+    const loadRes = await fetch(`${LOAD_ENDPOINT}`);
+    const result = await loadRes.text();
+
+    res.send(result);
+  } catch (error) {
+    return next(error);
+  }
+});
+
 // Listen
 var port = process.env.PORT || 3000;
 app.listen(port);

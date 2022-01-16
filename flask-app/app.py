@@ -1,6 +1,8 @@
-import os, time
-from flask import Flask, request
+import os
+import time
 from random import random
+
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -25,6 +27,21 @@ def fib_handler():
     """
     n = request.args.get('n')
     return str(fib(int(n)))
+
+@app.route('/load')
+def fib_handler():
+    """
+    Internal endpoint for fibonacchi calculation without anylimit.
+    """
+    return load()
+
+def load():
+    """
+    Gloriously uselss load generation
+    """
+    for i in range(20000):
+        i*i
+    return "Done!"
 
 def fib(n):
     """

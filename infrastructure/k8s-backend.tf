@@ -45,6 +45,17 @@ resource "kubernetes_deployment" "flask" {
             period_seconds = 5
           }
 
+          resources {
+            limits = {
+              cpu    = "200m"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "50m"
+              memory = "50Mi"
+            }
+          }
+
           startup_probe {
             http_get {
                 path = "/health"
@@ -55,6 +66,22 @@ resource "kubernetes_deployment" "flask" {
           }
         }
       }
+    }
+  }
+}
+
+resource "kubernetes_horizontal_pod_autoscaler" "flask-autoscaler" {
+  metadata {
+    name = "flask-autoscaler"
+  }
+
+  spec {
+    max_replicas = 10
+    min_replicas = 2
+
+    scale_target_ref {
+      kind = "Deployment"
+      name = kubernetes_deployment.flask.
     }
   }
 }

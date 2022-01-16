@@ -34,6 +34,10 @@ resource "kubernetes_deployment" "express" {
             name = "FIB_ENDPOINT"
             value = "http://${kubernetes_service.backend.metadata.0.name}.${kubernetes_service.backend.metadata.0.namespace}:${kubernetes_service.backend.spec.0.port.0.port}/fib"
           }
+          env {
+            name = "LOAD_ENDPOINT"
+            value = "http://${kubernetes_service.backend.metadata.0.name}.${kubernetes_service.backend.metadata.0.namespace}:${kubernetes_service.backend.spec.0.port.0.port}/load"
+          }
           image = "express-app:latest"
           name = "express-app"
           image_pull_policy = "IfNotPresent"
