@@ -31,7 +31,13 @@ As such, I will start with the simple stuff:
 4. When creating a terraform module, it is quite important (as per [`minikube` documentation][[minikube-docker-env]) to
    set the image pull policy to something other then the default "Always".
 
+5. I compose terraform module pretty much according to the description given in the Hashicorp guide + documentation. One
+   thing that I'm not particularly happy about so far is the setting of "FIB_ENDPOINT" value. It's a bit too long now.
+
+6. One thing that needs to happen on the nginx ingress: rewriting of the target URL. I went with the suggestiong from
+   [here][ingress-nginx-rewrite], it seemed simple enough.
+
 ## Feedback
 
-
 [minikube-docker-env]: https://minikube.sigs.k8s.io/docs/handbook/pushing/#1-pushing-directly-to-the-in-cluster-docker-daemon-docker-env
+[ingress-nginx-rewrite]: https://graphicsunplugged.com/2021/12/18/removing-url-prefixes-in-nginx-kubernetes-ingress/
