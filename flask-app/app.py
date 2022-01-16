@@ -29,13 +29,13 @@ def fib_handler():
     return str(fib(int(n)))
 
 @app.route('/load')
-def fib_handler():
+def load_handler():
     """
     Internal endpoint for fibonacchi calculation without anylimit.
     """
-    return load()
+    return generate_cpu_load()
 
-def load():
+def generate_cpu_load():
     """
     Gloriously uselss load generation
     """
