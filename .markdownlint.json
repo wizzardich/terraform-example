@@ -1,0 +1,8 @@
+{
+  "code-block-style": {
+      "style": "fenced"
+  },
+  "line-length": {
+      "line_length": 120
+  }
+}
