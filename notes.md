@@ -37,6 +37,8 @@ As such, I will start with the simple stuff:
 6. One thing that needs to happen on the nginx ingress: rewriting of the target URL. I went with the suggestiong from
    [here][ingress-nginx-rewrite], it seemed simple enough.
 
+7. Took me some time to realize I missed the `gunicorn` bind clue, but I figured it out.
+
 ## Feedback
 
 [minikube-docker-env]: https://minikube.sigs.k8s.io/docs/handbook/pushing/#1-pushing-directly-to-the-in-cluster-docker-daemon-docker-env
