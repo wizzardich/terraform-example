@@ -28,6 +28,11 @@ resource "kubernetes_deployment" "flask" {
           image = "flask-app:latest"
           name = "flask-app"
           image_pull_policy = "IfNotPresent"
+          env {
+            name = "HEALTH_TOKEN"
+            value = "foo"
+          }
+
           port {
             container_port = 8000
           }
