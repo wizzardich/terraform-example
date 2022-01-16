@@ -62,7 +62,7 @@ resource "kubernetes_deployment" "flask" {
                 port = 8000
             }
             failure_threshold = 3
-            period_seconds = 10
+            period_seconds = 30
           }
         }
       }
