@@ -36,6 +36,23 @@ resource "kubernetes_deployment" "flask" {
           port {
             container_port = 8000
           }
+          liveness_probe {
+            http_get {
+                path = "/health"
+                port = 8000
+            }
+            failure_threshold = 3
+            period_seconds = 5
+          }
+
+          startup_probe {
+            http_get {
+                path = "/health"
+                port = 8000
+            }
+            failure_threshold = 3
+            period_seconds = 10
+          }
         }
       }
     }

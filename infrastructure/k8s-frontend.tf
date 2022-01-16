@@ -24,6 +24,7 @@ resource "kubernetes_deployment" "express" {
         }
       }
       spec {
+
         container {
           env {
             name = "HEALTH_TOKEN"
@@ -38,6 +39,14 @@ resource "kubernetes_deployment" "express" {
           image_pull_policy = "IfNotPresent"
           port {
             container_port = 3000
+          }
+          liveness_probe {
+            http_get {
+                path = "/health"
+                port = 3000
+            }
+            failure_threshold = 3
+            period_seconds = 10
           }
         }
       }
