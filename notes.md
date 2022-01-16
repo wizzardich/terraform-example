@@ -13,7 +13,7 @@ As such, I will start with the simple stuff:
     - I'm not going in on image security/being rootless/exposing ports for this does not seem to be the focus of the
       exercise.
     - I'm also not inbuilding the env vars; these seem to be a good representation of configuration/env, so let's leave
-      them be and set them from the outside.
+      them be and set them from the outside. That's also the assignment demand.
 
 3. I'll push the images into the `minikube`. Well, rather, I'll directly build them inside. `eval $(minikube docker-env)`
    allows to retarget my docker CLI to use the docker daemon within `minikube`, so all the images further built will be
@@ -28,4 +28,10 @@ As such, I will start with the simple stuff:
    eval $(minikube docker-env -u)
    ```
 
+4. When creating a terraform module, it is quite important (as per [`minikube` documentation][[minikube-docker-env]) to
+   set the image pull policy to something other then the default "Always".
+
 ## Feedback
+
+
+[minikube-docker-env]: https://minikube.sigs.k8s.io/docs/handbook/pushing/#1-pushing-directly-to-the-in-cluster-docker-daemon-docker-env
