@@ -37,9 +37,36 @@ As such, I will start with the simple stuff:
 6. One thing that needs to happen on the nginx ingress: rewriting of the target URL. I went with the suggestiong from
    [here][ingress-nginx-rewrite], it seemed simple enough.
 
-7. Took me some time to realize I missed the `gunicorn` bind clue, but I figured it out.
+7. Took me some time to realize I missed the `gunicorn` bind clue, but I figured it out. By default `gunicorn` process
+   binds to `127.0.0.1` instead of `0.0.0.0`. Caused me some pain :)
+   
+8. I implemented an autoscaling policy, resource consumption-based. Based on the agreed duration of the task I did not
+   have enough time to benchmark it, or make a more resource consuming function then the `generate_load()` one, so I do
+   not have a clear understanding of how good/bad the autoscaler performs now.
 
 ## Feedback
+
+So, all-in-all assignment is fairly well described. I appreciated the documentation links a lot, including the ones that
+help the setup, though I already had most of that up and running. That said, there is a couple of missing points:
+
+1. Define what's your policy on modifying the sources. I assumed that "no touching" is the policy implied. Might also make
+   sense to ask the candidate to implement a service in the language of choice. Not the main focus, but does provide a bit
+   of an insight into the thinking pattern.
+
+2. Define the expected set of deliverables. Are dockerfiles important? Is Terraform where you want the candidate to focus?
+   I understand that you probably want to estimate the full picture, but some things are still probably more important then
+   some others.
+
+3. The general description could be a bit refocused; instead of "install kubernetes resources", you probably want to say
+   something like "Submit Terraform modules that will...". A set of constraints is good: tests the knowledge on ingresses,
+   services, deployments, introducing containers into the cluster, debugging the containers, etc.
+   
+   Again, it's understandable, just could be written a bit clearer.
+   
+4. If a person fulfilling the assignment has some terraform experience, 3 hours are way too long. It was a lot of time even
+   for me, though I managed to spend some of it messing around with changing the code and reading the docs. I guess that
+   depends on the point of the exercise? If the point is taking a look at how fast a new tech can be picked up, this  might
+   indeed be a decent time allotment.
 
 [minikube-docker-env]: https://minikube.sigs.k8s.io/docs/handbook/pushing/#1-pushing-directly-to-the-in-cluster-docker-daemon-docker-env
 [ingress-nginx-rewrite]: https://graphicsunplugged.com/2021/12/18/removing-url-prefixes-in-nginx-kubernetes-ingress/
